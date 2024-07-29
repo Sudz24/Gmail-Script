@@ -1,0 +1,26 @@
+{
+    "rules" : [
+        {
+            "name" : "Rule #1",
+            "field" : "subject",
+            "predicate" : "contains",
+            "value" : "India"
+        },
+        {
+            "name" : "Rule #2",
+            "field" : "date",
+            "predicate" : "less_than",
+            "value" : "1 months"
+        }
+    ],
+    "predicate" : "all",
+    "actions" : [
+        {
+            "name" : "mark_as_unread"
+        },
+        { 
+            "name" : "move",
+            "folder_name" : "STR"
+        }
+    ]
+}
