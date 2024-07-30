@@ -64,20 +64,20 @@ class RulesHandler:
 
         return False
     
-    def evaluate_date_rule(self, email_date_str, rule_value, predicate):
+    def evaluate_date_rule(self, email_date, rule_value, predicate):
 
         """Evaluate a date rule on an email."""
 
-        email_date_str = email_date_str.replace(' (UTC)', '')
-        email_date = datetime.strptime(email_date_str, '%a, %d %b %Y %H:%M:%S %z')
+        # email_date_str = email_date_str.replace(' (UTC)', '')
+        # email_date = datetime.strptime(email_date_str, '%a, %d %b %Y %H:%M:%S %z')
         rule_parts = rule_value.split()
         number = int(rule_parts[0])
         unit = rule_parts[1]
 
         if unit == 'days':
-            cutoff_date = datetime.now(timezone.utc) - timedelta(days=number)
+            cutoff_date = datetime.now() - timedelta(days=number)
         elif unit == 'months':
-            cutoff_date = datetime.now(timezone.utc) - timedelta(days=number * 30)
+            cutoff_date = datetime.now() - timedelta(days=number * 30)
         else:
             return False
 

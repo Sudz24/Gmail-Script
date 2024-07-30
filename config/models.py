@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, DateTime
 from sqlalchemy.orm import  declarative_base
 
 Base = declarative_base()
@@ -9,5 +9,5 @@ class Email(Base):
     from_mail = Column(String)
     to_mail = Column(String)
     subject = Column(String)
-    date = Column(String)
+    date = Column(DateTime)
     message = Column(String)

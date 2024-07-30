@@ -10,7 +10,7 @@
             "name" : "Rule #2",
             "field" : "date",
             "predicate" : "less_than",
-            "value" : "1 months"
+            "value" : "1 days"
         }
     ],
     "predicate" : "all",

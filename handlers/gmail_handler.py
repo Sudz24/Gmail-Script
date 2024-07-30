@@ -4,6 +4,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import os
 import base64
+from datetime import datetime
+import pytz
 from utils.logging_config import logging
 
 # If modifying these SCOPES, delete the file token.json.
@@ -54,12 +56,9 @@ class GmailHandler:
             elif name == 'Subject':
                 details['Subject'] = value
             elif name == 'Date':
-                details['Date'] = value
+                details['Date'] = datetime.strptime(value.replace(' (UTC)', ''), '%a, %d %b %Y %H:%M:%S %z').astimezone(pytz.utc)
             elif name == "To":
                 details["To"] = value
-
-        # logging.info(message['payload'].keys())
-        # print("Done with - " + details['Subject'])
 
         parts = message.get('payload', {}).get('parts', [])
         if parts:
@@ -68,9 +67,6 @@ class GmailHandler:
                     details['Message'] = base64.urlsafe_b64decode(part['body']['data']).decode('utf-8')
         else:
             details['Message'] = base64.urlsafe_b64decode(message['payload']['body']['data']).decode('utf-8')
-
-
-        # details['Message'] = base64.urlsafe_b64decode(message['payload']['body']['data']).decode('utf-8')
 
         return details
     
