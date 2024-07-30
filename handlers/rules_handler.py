@@ -1,6 +1,7 @@
 import json
 from utils.logging_config import logging
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
+from config.actions import ActionType
 
 """
 The Rules can have all the fields from models.py : 
@@ -102,11 +103,12 @@ class RulesHandler:
         """Apply actions on an email based on the rules."""
 
         for action in self.rules['actions']:
-            if action['name'] == 'mark_as_read':
+            action_type = ActionType(action['name'])
+            if action_type == ActionType.MARK_AS_UNREAD:
                 gmail_handler.mark_as_read(email.id)
-            elif action['name'] == 'move':
+            elif action_type == ActionType.MOVE:
                 gmail_handler.move_to_folder(email.id, action['folder_name'])
-            elif action['name'] == 'mark_as_unread':
+            elif action_type == ActionType.MARK_AS_UNREAD:
                 gmail_handler.mark_as_unread(email.id)
 
         logging.info("Successfully finished all actions for the mail!\n")
