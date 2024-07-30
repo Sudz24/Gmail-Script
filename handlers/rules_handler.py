@@ -104,7 +104,7 @@ class RulesHandler:
 
         for action in self.rules['actions']:
             action_type = ActionType(action['name'])
-            if action_type == ActionType.MARK_AS_UNREAD:
+            if action_type == ActionType.MARK_AS_READ:
                 gmail_handler.mark_as_read(email.id)
             elif action_type == ActionType.MOVE:
                 gmail_handler.move_to_folder(email.id, action['folder_name'])
